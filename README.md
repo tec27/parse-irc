@@ -4,6 +4,8 @@ A simple writable stream IRC parser.
 [![Build Status](https://img.shields.io/travis/tec27/parse-irc.png?style=flat)](https://travis-ci.org/tec27/parse-irc)
 [![NPM](https://img.shields.io/npm/v/parse-irc.svg?style=flat)](https://www.npmjs.org/package/parse-irc)
 
+[![NPM](https://nodei.co/npm/parse-irc.png)](https://nodei.co/npm/parse-irc/)
+
 ## Usage
 ```JavaScript
 var net = require('net')
