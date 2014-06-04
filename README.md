@@ -1,8 +1,7 @@
 #parse-irc
 A simple writable stream IRC parser.
 
-## Installation
-`npm install parse-irc`
+[![Build Status](https://travis-ci.org/tec27/parse-irc.png?branch=master)](https://travis-ci.org/tec27/parse-irc)
 
 ## Usage
 ```
@@ -15,6 +14,9 @@ parser.on('message', function(msg) {
 
 net.connect(6667, 'irc.freenode.net').pipe(parser)
 ```
+
+## Installation
+`npm install parse-irc`
 
 ## Running tests
 `npm test`
