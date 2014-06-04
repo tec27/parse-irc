@@ -40,7 +40,6 @@ Emitted each time a message has been fully parsed. A complete message structure 
 ```
 Only `command` is guaranteed to be present. If the message had no prefix or had no parameters,
 these fields will be `undefined` in the resulting message object.
-```
 
 #### parser.on('error', function(err) {})
 Emitted when a parse error occurs. `err` contains information about what the invalid state was.
