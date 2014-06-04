@@ -1,7 +1,8 @@
 #parse-irc
 A simple writable stream IRC parser.
 
-[![Build Status](https://travis-ci.org/tec27/parse-irc.png?branch=master)](https://travis-ci.org/tec27/parse-irc) [![NPM](https://img.shields.io/npm/v/parse-irc.svg)](https://www.npmjs.org/package/parse-irc)
+[![Build Status](https://travis-ci.org/tec27/parse-irc.png?branch=master)](https://travis-ci.org/tec27/parse-irc)
+[![NPM](https://img.shields.io/npm/v/parse-irc.svg)](https://www.npmjs.org/package/parse-irc)
 
 ## Usage
 ```JavaScript
@@ -28,6 +29,9 @@ that will parse messages as they are written to it.
 #### parser.on('message', function(msg) {})
 Emitted each time a message has been fully parsed. A complete message structure looks like:
 ```JavaScript
+// Example message:
+// :server.example.com NOTICE * :*** Looking up your hostname...
+
 {
   prefix: 'server.example.com',
   command: 'NOTICE',
