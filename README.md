@@ -1,8 +1,8 @@
 #parse-irc
 A simple writable stream IRC parser.
 
-[![Build Status](https://travis-ci.org/tec27/parse-irc.png?branch=master)](https://travis-ci.org/tec27/parse-irc)
-[![NPM](https://img.shields.io/npm/v/parse-irc.svg)](https://www.npmjs.org/package/parse-irc)
+[![Build Status](https://img.shields.io/travis/tec27/parse-irc.png?style=flat)](https://travis-ci.org/tec27/parse-irc)
+[![NPM](https://img.shields.io/npm/v/parse-irc.svg?style=flat)](https://www.npmjs.org/package/parse-irc)
 
 ## Usage
 ```JavaScript
