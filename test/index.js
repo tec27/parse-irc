@@ -8,7 +8,7 @@ function stream(str) {
 
 function parsed(str, cb) {
   var p = parser()
-  p.on('message', function (message) {
+  p.on('data', function (message) {
     cb(message)
   })
   stream(str).pipe(p)
@@ -102,7 +102,7 @@ test('handles multiple messages', function(t) {
     t.plan(2)
     var p = parser()
       , i = 0
-    p.on('message', function(msg) {
+    p.on('data', function(msg) {
       t.deepEqual(msg, results[i++])
     })
 

@@ -4,14 +4,15 @@
   "description": "Streaming IRC parser.",
   "main": "index.js",
   "dependencies": {
-    "inherits": "~2.0.1"
+    "inherits": "~2.0.1",
+    "through2": "^0.5.1"
   },
   "devDependencies": {
     "tap": "~0.4.9",
     "stream-spigot": "~3.0.3"
   },
   "scripts": {
-    "test": "tap -d ./test/*"
+    "test": "tap ./test/*"
   },
   "repository": {
     "type": "git",

@@ -1,15 +1,8 @@
-var Writable = require('stream').Writable
+var through = require('through2')
   , inherits = require('inherits')
 
-function Parser() {
-  Writable.call(this, { decodeStrings: false })
-  this._state = message
-  this._temp = {}
-  this._decoded = {}
-}
-inherits(Parser, Writable)
-
-Parser.prototype._write = function(chunk, enc, cb) {
+var ThroughStream =
+    through.ctor({ decodeStrings: false }, function(chunk, enc, cb) {
   var isBuffer = Buffer.isBuffer(chunk)
   for (var i = 0; i < chunk.length; i++) {
     try {
@@ -20,11 +13,23 @@ Parser.prototype._write = function(chunk, enc, cb) {
     }
   }
   cb()
+})
+
+function Parser() {
+  ThroughStream.call(this)
+  // Make the Readable part of this stream objectMode while still letting the
+  // Writable side accept buffers/strings
+  this._readableState.objectMode = true
+
+  this._state = message
+  this._temp = {}
+  this._decoded = {}
 }
+inherits(Parser, ThroughStream)
 
 // Emits a fully parsed message
 Parser.prototype._parsed = function() {
-  this.emit('message', this._decoded)
+  this.push(this._decoded)
   this._temp = {}
   this._decoded = {}
 }

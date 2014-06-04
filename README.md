@@ -24,16 +24,18 @@ var createParser = require('parse-irc')
 ```
 ### methods
 #### var parser = createParser()
-Return a [Writable stream](http://nodejs.org/docs/latest/api/stream.html#stream_class_stream_writable)
-that will parse messages as they are written to it.
+Return a [Transform stream](http://nodejs.org/api/stream.html#stream_class_stream_transform_1)
+that will parse messages as they are written to it, and emit decoded message objects. Streams
+piping writing to this stream should be emitting buffers or strings, and streams reading from
+it should be in `objectMode`.
 
 ### events
-#### parser.on('message', function(msg) {})
+Like any Transform stream:
+#### parser.on('data', function(msg) {})
 Emitted each time a message has been fully parsed. A complete message structure looks like:
 ```JavaScript
 // Example message:
 // :server.example.com NOTICE * :*** Looking up your hostname...
-
 {
   prefix: 'server.example.com',
   command: 'NOTICE',
@@ -45,6 +47,8 @@ these fields will be `undefined` in the resulting message object.
 
 #### parser.on('error', function(err) {})
 Emitted when a parse error occurs. `err` contains information about what the invalid state was.
+
+#### See also: [Readable stream](http://nodejs.org/api/stream.html#stream_class_stream_readable)
 
 ## Installation
 `npm install parse-irc`
