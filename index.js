@@ -10,10 +10,11 @@ function Parser() {
 inherits(Parser, Writable)
 
 Parser.prototype._write = function(chunk, enc, cb) {
+  var isBuffer = Buffer.isBuffer(chunk)
   for (var i = 0; i < chunk.length; i++) {
     try {
-      this._state =
-          this._state(this, enc ? chunk[i] : chunk.toString(enc, i, i))
+      this._state = this._state(this,
+          (!isBuffer ? chunk[i] : chunk.toString('utf8', i, i + 1)))
     } catch (err) {
       return cb(err)
     }
@@ -63,16 +64,18 @@ function message(parser, char) {
     parser._decoded.prefix = ''
     return prefixedMessage
   } else {
-    return messagePostPrefix
+    return messagePostPrefix(parser, char)
   }
 }
 
+// TODO(tec27): parse prefixes more?
 function prefixedMessage(parser, char) {
   if (char === ' ') {
     return messagePostPrefix
   }
 
   parser._decoded.prefix += char
+  return prefixedMessage
 }
 
 function messagePostPrefix(parser, char) {
@@ -85,6 +88,7 @@ function messagePostPrefix(parser, char) {
   }
 
   parser._decoded.command += char
+  return messagePostPrefix
 }
 
 function newline(parser, char) {
@@ -101,7 +105,7 @@ function params(parser, char) {
     parser._decoded.params.push(parser._temp.param)
     parser._temp.param = ''
 
-    if (params.length < 14) {
+    if (parser._decoded.params.length < 14) {
       return params
     } else {
       parser._temp.trailing = ''
@@ -120,6 +124,7 @@ function params(parser, char) {
   }
 
   parser._temp.param += char
+  return params
 }
 
 function trailing(parser, char) {
@@ -129,4 +134,5 @@ function trailing(parser, char) {
   }
 
   parser._temp.trailing += char
+  return trailing
 }
