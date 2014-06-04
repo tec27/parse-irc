@@ -11,7 +11,7 @@ A simple writable stream IRC parser.
 var net = require('net')
   , parser = require('parse-irc')()
 
-parser.on('message', function(msg) {
+parser.on('data', function(msg) {
   console.dir(msg)
 })
 
