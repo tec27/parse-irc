@@ -26,8 +26,8 @@ var createParser = require('parse-irc')
 #### var parser = createParser()
 Return a [Transform stream](http://nodejs.org/api/stream.html#stream_class_stream_transform_1)
 that will parse messages as they are written to it, and emit decoded message objects. Streams
-piping writing to this stream should be emitting buffers or strings, and streams reading from
-it should be in `objectMode`.
+writing to this stream should be emitting buffers or strings, and streams reading from it
+should be in `objectMode`.
 
 ### events
 Like any Transform stream:
