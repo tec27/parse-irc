@@ -1,6 +1,6 @@
 {
   "name": "parse-irc",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Streaming IRC parser.",
   "main": "index.js",
   "dependencies": {
