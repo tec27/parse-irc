@@ -1,8 +1,8 @@
-var through = require('through2')
+var objectify = require('through2-objectify')
   , inherits = require('inherits')
 
 var ThroughStream =
-    through.ctor({ decodeStrings: false }, function(chunk, enc, cb) {
+    objectify.ctor({ decodeStrings: false }, function(chunk, enc, cb) {
   var isBuffer = Buffer.isBuffer(chunk)
   for (var i = 0; i < chunk.length; i++) {
     try {
@@ -17,10 +17,6 @@ var ThroughStream =
 
 function Parser() {
   ThroughStream.call(this)
-  // Make the Readable part of this stream objectMode while still letting the
-  // Writable side accept buffers/strings
-  this._readableState.objectMode = true
-
   this._state = message
   this._temp = {}
   this._decoded = {}
