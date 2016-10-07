@@ -1,13 +1,18 @@
 var objectify = require('through2-objectify')
   , inherits = require('inherits')
+  , StringDecoder = require('string_decoder').StringDecoder
+
 
 var ThroughStream =
     objectify.ctor({ decodeStrings: false }, function(chunk, enc, cb) {
   var isBuffer = Buffer.isBuffer(chunk)
+  if (isBuffer) {
+    this._decoder = this._decoder || new StringDecoder('utf8');
+    chunk = this._decoder.write(chunk)
+  }
   for (var i = 0; i < chunk.length; i++) {
     try {
-      this._state = this._state(this,
-          (!isBuffer ? chunk[i] : chunk.toString('utf8', i, i + 1)))
+      this._state = this._state(this, chunk[i])
     } catch (err) {
       return cb(err)
     }
