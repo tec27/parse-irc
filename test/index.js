@@ -113,3 +113,10 @@ test('handles multiple messages', function(t) {
 
   t.end()
 })
+
+test('handles utf8 correctly', function(t) {
+  parseTest(t, [
+    [ 'PRIVMSG #channel :äöü\r\n',
+        { command: 'PRIVMSG', params: [ '#channel', 'äöü' ] } ]
+    ]);
+})
